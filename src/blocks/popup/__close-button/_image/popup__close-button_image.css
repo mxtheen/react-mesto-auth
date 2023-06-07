@@ -1,0 +1,10 @@
+.popup__close-button_image {
+  top: -4%;
+  right: -1%;
+}
+@media (max-width: 550px) {
+  .popup__close-button_image {
+    top: -3%;
+    right: 2%;
+  }
+}

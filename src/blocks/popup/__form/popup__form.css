@@ -1,0 +1,9 @@
+.popup__form {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  min-height: 272px;
+  position: relative;
+  cursor: initial;
+}

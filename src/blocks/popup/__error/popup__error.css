@@ -1,0 +1,18 @@
+.popup__error {
+  font-size: 12px;
+  color: #FF0000;
+  line-height: 1.21;
+  width: 358px;
+  min-height: 30px;
+  align-self: center;
+  margin: 0 0 0 0;
+  padding: 0;
+}
+.popup__error:last-of-type {
+  margin-bottom: 9px;
+}
+@media (max-width: 550px) {
+  .popup__error {
+    width: 238px;
+  }
+}
