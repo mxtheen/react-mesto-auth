@@ -4,7 +4,7 @@ export default class Api {
     this.headers = config.headers
   }
 
-  _getJsonResponse(res) {
+  _getJSONResponse(res) {
     if (res.ok) {
       return res.json()
     } else {
@@ -16,7 +16,7 @@ export default class Api {
       headers: this.headers,
       method: "GET"
     }).then(res => {
-      return this._getJsonResponse(res)
+      return this._getJSONResponse(res)
     })
   }
   createNewCard(item) {
@@ -25,7 +25,7 @@ export default class Api {
       method: "POST",
       body: JSON.stringify(item)
     }).then(res => {
-      return this._getJsonResponse(res)
+      return this._getJSONResponse(res)
     })
 
   }
@@ -35,7 +35,7 @@ export default class Api {
       headers: this.headers,
       method: "GET"
     }).then(res => {
-      return this._getJsonResponse(res)
+      return this._getJSONResponse(res)
     })
   }
   setUserInfo(userData) {
@@ -44,7 +44,7 @@ export default class Api {
       method: "PATCH",
       body: JSON.stringify(userData)
     }).then(res => {
-      return this._getJsonResponse(res)
+      return this._getJSONResponse(res)
     })
   }
   changeUserAvatarImage(avatar) {
@@ -53,7 +53,7 @@ export default class Api {
       method: "PATCH",
       body: JSON.stringify(avatar)
     }).then(res => {
-      return this._getJsonResponse(res)
+      return this._getJSONResponse(res)
     })
   }
   deleteCard(cardId) {
@@ -61,7 +61,7 @@ export default class Api {
       headers: this.headers,
       method: "DELETE"
     }).then(res => {
-      return this._getJsonResponse(res)
+      return this._getJSONResponse(res)
     })
   }
   putLikeCard(cardId) {
@@ -69,7 +69,7 @@ export default class Api {
       headers: this.headers,
       method: "PUT"
     }).then(res => {
-      return this._getJsonResponse(res)
+      return this._getJSONResponse(res)
     })
   }
   deleteLikeCard(cardId) {
@@ -77,7 +77,7 @@ export default class Api {
       headers: this.headers,
       method: "DELETE"
     }).then(res => {
-      return this._getJsonResponse(res)
+      return this._getJSONResponse(res)
     })
   }
 }

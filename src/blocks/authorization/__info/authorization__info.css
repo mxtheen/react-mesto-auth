@@ -1,0 +1,10 @@
+.authorization__info {
+  background-color: #fff;
+  border-radius: 10px;
+  width: 430px;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

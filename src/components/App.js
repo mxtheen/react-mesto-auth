@@ -8,18 +8,30 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup'
 import '../index.css';
 import apiInit from '../utils/apiInit';
+import * as auth from "../utils/auth.js"
 import CurrentUserContext from '../contexts/CurrentUserContext'
 import React from 'react';
-
+import Login from './Login';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import Register from './Register';
+import PageNotFound from './PageNotFound';
+import ProtectedRouteElement from './ProtectedRoute';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setAddProfileOpen] = React.useState(false)
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
   const [isDeleteConfirmPopupOpen, setDeleteConfirmPopup] = React.useState(false)
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false)
   const [selectedCard, setSelectedCard] = React.useState(null)
   const [currentUser, setCurrentUser] = React.useState({})
   const [cards, setCards] = React.useState([])
+  const [loggedIn, setLoggedIn] = React.useState(false)
+  const [email, setEmail] = React.useState("")
+  const [isSucces, setIsSucces] = React.useState(false)
+
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     Promise.all([
@@ -34,6 +46,57 @@ function App() {
         console.log("При получении данных с сервера возникла ошибка:", err)
       })
   }, [])
+
+  function handleLogin(email, password) {
+    auth.login(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token)
+          setEmail(email)
+          navigate("/")
+          handleLoggedIn()
+        }
+      })
+      .catch((err) => {
+        handleInfoTooltipOpen()
+        setIsSucces(false)
+        console.log(err)
+      })
+  }
+
+  function handleCheckToken() {
+    const jwt = localStorage.getItem("jwt")
+    if (jwt) {
+      auth.checkToken(jwt)
+        .then((data) => {
+          setEmail(data.data.email)
+          handleLoggedIn()
+          navigate("/")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }
+
+  React.useEffect(() => {
+    handleCheckToken()
+  }, [])
+
+  function handleSignOut() {
+    localStorage.removeItem("jwt")
+    navigate("/sign-in")
+    setLoggedIn(false)
+  }
+
+
+  function handleLoggedIn() {
+    setLoggedIn(true)
+  }
+
+  function handleInfoTooltipOpen() {
+    setInfoTooltipOpen(true)
+  }
 
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true)
@@ -114,27 +177,37 @@ function App() {
     setEditProfilePopupOpen(false)
     setAddProfileOpen(false)
     setEditAvatarPopupOpen(false)
-    setSelectedCard(null)
     setDeleteConfirmPopup(false)
+    setInfoTooltipOpen(false)
+    setSelectedCard(null)
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header />
-      <Main
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}
-        onCardClick={handleCardClick}
-        onCardDelete={handleCardDelete}
-        onCardLike={handleCardLike}
-        cards={cards}
-      />
+      <Header email={email} signOut={handleSignOut} loggedIn={loggedIn} />
+      <InfoTooltip />
+      <Routes>
+        <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
+        <Route path="/sign-up" element={<Register handleSucces={setIsSucces} onRegister={handleInfoTooltipOpen} />} />
+        <Route path="/" element={<ProtectedRouteElement
+          loggedIn={loggedIn}
+          element={Main}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          onCardDelete={handleCardDelete}
+          onCardLike={handleCardLike}
+          cards={cards}
+        ></ProtectedRouteElement>} />
+        <Route path="*" element={<PageNotFound/>}/>
+      </Routes>
       <Footer />
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}></EditProfilePopup>
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}></EditAvatarPopup>
       <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}></AddPlacePopup>
       <PopupWithForm name='confirmation' title='Вы уверены?' isOpen={isDeleteConfirmPopupOpen} onClose={closeAllPopups} buttonContent="Да"></PopupWithForm>
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      <InfoTooltip isSucces={isSucces} isOpen={isInfoTooltipOpen} onClose={closeAllPopups} />
     </CurrentUserContext.Provider>
   );
 }

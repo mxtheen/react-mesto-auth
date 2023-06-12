@@ -1,0 +1,10 @@
+.authorization {
+  background-color: #000;
+  max-width: 358px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

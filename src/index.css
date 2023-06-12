@@ -6,6 +6,9 @@
 /*подключение глобальных стилей для страницы*/
 @import url(../src/blocks/header/header.css);
 @import url(../src/blocks/header/__logo/header__logo.css);
+@import url(../src/blocks/header/__user-info/header__user-info.css);
+@import url(../src/blocks/header/__link/header__link.css);
+@import url(../src/blocks/header/__email/header__email.css);
 /*стили для блока header*/
 @import url(../src/blocks/profile/profile.css);
 @import url(../src/blocks/profile/__avatar/profile__avatar.css);
@@ -55,3 +58,22 @@
 @import url(../src/blocks/popup/__image/popup__image.css);
 @import url(../src/blocks/popup/__content-scale-image/popup__content-scale-image.css);
 @import url(../src/blocks/popup/__close-button/_image/popup__close-button_image.css);
+@import url(../src/blocks/popup/__registration-image/popup__registration-image.css);
+/*стили для блока popup*/
+@import url(../src/blocks/auth/auth.css);
+@import url(../src/blocks/authorization/authorization.css);
+@import url(../src/blocks/authorization/__form/autharization__form.css);
+@import url(../src/blocks/authorization/__button/authorization__button.css);
+@import url(../src/blocks/authorization/__input/authorization__input.css);
+@import url(../src/blocks/authorization/__title/authorization__title.css);
+@import url(../src/blocks/authorization/__link/authorization__link.css);
+@import url(../src/blocks/authorization/__info/authorization__info.css);
+@import url(../src/blocks/authorization/__info-image/authorization__info-image.css);
+@import url(../src/blocks/authorization/__info-caption/authorization__info-caption.css);
+/*стили для блока auth*/
+@import url(../src/blocks/not-found/not-found.css);
+@import url(../src/blocks/not-found/__container/not-found__container.css);
+@import url(../src/blocks/not-found/__title/not-found__title.css);
+@import url(../src/blocks/not-found/__subtitle/not-found__subtitle.css);
+@import url(../src/blocks/not-found/__image/not-found__image.css);
+@import url(../src/blocks/not-found/__link/not-found__link.css);

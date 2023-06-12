@@ -1,0 +1,12 @@
+.authorization__link {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.21;
+  padding: 0;
+  margin: 15px auto 0;
+  text-decoration: none;
+  transition: opacity 0.1s ease;
+}
+.authorization__link:hover {
+  opacity: 60%;
+}
