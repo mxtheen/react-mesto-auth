@@ -183,11 +183,10 @@ function App() {
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header email={email} signOut={handleSignOut} loggedIn={loggedIn} />
-      <InfoTooltip />
+      <Header email={email} signOut={handleSignOut} loggedIn={loggedIn}/>
       <Routes>
         <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
-        <Route path="/sign-up" element={<Register handleSucces={setIsSucces} onRegister={handleInfoTooltipOpen} />} />
+        <Route path="/sign-up" element={<Register handleSucces={setIsSucces} onRegister={handleInfoTooltipOpen} />}/>
         <Route path="/" element={<ProtectedRouteElement
           loggedIn={loggedIn}
           element={Main}
@@ -202,10 +201,10 @@ function App() {
         <Route path="*" element={<PageNotFound/>}/>
       </Routes>
       <Footer />
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}></EditProfilePopup>
-      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}></EditAvatarPopup>
-      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}></AddPlacePopup>
-      <PopupWithForm name='confirmation' title='Вы уверены?' isOpen={isDeleteConfirmPopupOpen} onClose={closeAllPopups} buttonContent="Да"></PopupWithForm>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
+      <PopupWithForm name='confirmation' title='Вы уверены?' isOpen={isDeleteConfirmPopupOpen} onClose={closeAllPopups} buttonContent="Да"/>
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       <InfoTooltip isSucces={isSucces} isOpen={isInfoTooltipOpen} onClose={closeAllPopups} />
     </CurrentUserContext.Provider>

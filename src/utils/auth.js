@@ -1,4 +1,6 @@
+import { checkResponse } from "./checkResponse";
 export const BASE_URL = 'https://auth.nomoreparties.co';
+
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -8,9 +10,7 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    })
+    .then(checkResponse)
 };
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
@@ -20,9 +20,7 @@ export const login = (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    })
+    .then(checkResponse)
 }
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
@@ -32,7 +30,5 @@ export const checkToken = (token) => {
       'Authorization': `Bearer ${token}`,
     }
   })
-    .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    })
+    .then(checkResponse)
 }
