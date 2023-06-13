@@ -20,7 +20,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://mxtheen.github.io/.",
+  "homepage": "https://mxtheen.github.io/#",
   "eslintConfig": {
     "extends": [
       "react-app",
